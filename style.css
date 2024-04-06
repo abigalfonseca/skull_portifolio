@@ -45,15 +45,25 @@ body {
     justify-content: space-between;
     align-items: center;
     z-index: 600;
+    transition: .3s;
+}
+
+.header.sticky {
+    background: var(--bg-color);
 }
 
 .logo {
+    position: relative;
     font-family: 'Amazon';
     font-size: 4.8rem;
     color: var(--text-color);
 }
 
-.menu-nav a {
+.navbar {
+    position: relative
+}
+
+.navbar a {
     font-size: 1.7rem;
     color: var(--text-color);
     font-weight: 500;
@@ -61,16 +71,17 @@ body {
     transition: .3s;
 }
 
-.menu-nav a:hover,
-.menu-nav a.active {
+.navbar a:hover,
+.navbar a.active {
     color: var(--main-color);
 }
 
 #menu-icon {
+    position: relative;
     font-size: 3.6rem;
     color: var(--text-color);
     cursor: pointer;
-    display: none;-
+    display: none;
 }
 
 section {
@@ -89,18 +100,24 @@ section {
 
 .home-content {
     max-width: 60rem;
+    z-index: 99;
 }
 
 .home-content h1 {
+    position: relative;
+    display: inline-block;
     font-size: 4rem;
     font-weight: 700;
     line-height: 1.3;
 }
 
+.home-content h1 span {
+    color: var(--text-color);
+}
+
 .home-content .text-animate {
     position: relative;
-    width: 32.rem;
-    padding-top: 2rem;
+    width: 32.8rem;
 }
 
 .home-content .text-animate h3 {
@@ -108,10 +125,38 @@ section {
     font-weight: 700;
     color: transparent;
     -webkit-text-stroke: .7px var(--main-color);
+    background-image: linear-gradient(var(--main-color), var(--main-color));
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-position: -33rem 0;
+    
+}
+
+.home.show-animate .home-content .text-animate h3 {
+    animation: homeBgText 8s linear infinite;
+    animation-delay: 2s;
+}
+
+.home-content .text-animate h3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-right: 2px solid var(--main-color);
+    z-index: -1; 
+}
+
+.home.show-animate .home-content .text-animate h3::before {
+    animation: homeCursorText 8s linear infinite;
+    animation-delay: 2s;
 }
 
 .home-content p {
+    position: relative;
     font-size: 1.6rem;
+    text-wrap: wrap;
     margin: 2rem 0 4rem;
 }
 
@@ -246,6 +291,7 @@ section {
 }
 
 .heading {
+    position: relative;
     font-size: 4rem;
     margin-bottom: 3rem;
     text-align: center;
@@ -283,6 +329,7 @@ span {
     border-right: .2rem solid var(--main-color);
     border-left: .2rem solid var(--main-color);
     border-bottom: .2rem solid var(--second-bg-color);
+    animation: sobreSpinner 8s linear infinite;
 }
 
 .sobre-content {
@@ -290,10 +337,13 @@ span {
 }
 
 .sobre-content h3 {
+    position: relative;
+    display: inline-block;
     font-size: 2.6rem;
 }
 
 .sobre-content p {
+    position: relative;
     font-size: 1.6rem;
     margin: 2rem 0 3rem;
 }
@@ -327,11 +377,14 @@ span {
 }
 
 .education-column .title {
+    position: relative;
+    display: inline-block;
     font-size: 2.5rem;
     margin: 0 0 1.5rem 2rem;
 }
 
 .education-column .education-box {
+    position: relative;
     border-left: .2rem solid var(--main-color);
 }
 
@@ -386,6 +439,7 @@ span {
 }
 
 .education-content .content h3 {
+    position: relative;
     font-size: 2rem;
 }
 
@@ -400,6 +454,12 @@ span {
     background: var(--second-bg-color);
 }
 
+.skills h2 {
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .skills .skills-row {
     display: flex;
     flex-wrap: wrap;
@@ -411,8 +471,14 @@ span {
 }
 
 .skills-column .title {
+    position: relative;
+    display: inline-block;
     font-size: 2.5rem;
     margin: 0 0 1.5rem;
+}
+
+.skills-column .skills-box {
+    position: relative;
 }
 
 .skills-box .skills-content {
@@ -457,7 +523,7 @@ span {
 }
 
 .skills-content .progress .bar {
-    height: 2.5rem;
+    height: 3rem;
     border-radius: .6rem;
     border: .2rem solid var(--main-color);
     padding: .5rem;
@@ -506,6 +572,12 @@ span {
 .contacto {
     min-height: auto;
     padding-bottom: 7rem;
+}
+
+.contacto h2 {
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .contacto form {
@@ -582,6 +654,11 @@ span {
     background: var(--second-bg-color);
 }
 
+.footer-text,
+.footer-iconTop {
+    position: relative;
+}
+
 .footer-text p {
     font-size: 1.6rem;
     color: var(--text-color);
@@ -625,4 +702,248 @@ span {
 
 .footer-iconTop a:hover i:hover {
     color: var(--main-color);
+}
+
+/* RELOAD AND SCROLL*/
+.animate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    z-index: 98;
+}
+
+.animate.home-img {
+    width: 50%;
+}
+
+.logo .animate,
+.navbar .animate,
+#menu-icon .animate,
+.home.show-animate .animate {
+    animation: showRight 1s ease forwards;
+    animation-delay: calc(.3s * var(--i));
+}
+
+.animate.scroll {
+    transition: 1s ease;
+    transition-delay: calc(.3s / var(--i));
+    animation: none; 
+}
+
+section:nth-child(odd) .animate.scroll,
+.footer .animate.scroll {
+    background: var(--second-bg-color);
+}
+
+.educacao .education-box .animate.scroll {
+    width: 105%;
+}
+
+.sobre.show-animate .animate.scroll,
+.educacao.show-animate .animate.scroll,
+.skills.show-animate .animate.scroll, 
+.contacto.show-animate .animate.scroll,
+.footer.show-animate .animate.scroll {
+    transition-delay: calc(.3s * var(--i));
+    width: 0;
+}
+
+/* BREAKPOINTS */
+
+@media (max-width: 1200px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media (max-width: 991px)  {
+    .header {
+        padding: 2rem 4%;
+    }
+
+    section {
+        padding: 10rem 4% 2rem;
+    }
+
+    .home {
+        padding: 0 4%;
+    }
+
+    .footer {
+        padding: 2rem 4%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        background: var(--bg-color);
+    }
+
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: -100%;
+        width: 100%;
+        padding: 1rem 4%;
+        background: var(--main-color);
+        z-index: 1;
+        transition: .25s ease;
+        transition-delay: .25s;
+    }
+
+    .navbar.active {
+        transition-delay: 0s;
+        left: 0;
+    }
+
+    .navbar .active-nav {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--bg-color);
+        z-index: -1;
+        transition: .25s ease;
+        transition-delay: 0s;
+    }
+
+    .navbar.active .active-nav {
+        transition-delay: .25s;
+        left: 0;
+    }
+
+    .navbar a {
+        display: block;
+        font-size: 2rem;
+        margin: 3rem 0;
+        transform: translateX(-20rem);
+        transition: .25s ease;
+        transition-delay: 0s;
+
+    }
+
+    .navbar.active a {
+        transform: translateX(0);
+        transition-delay: .25s;
+
+    }
+
+    .home-imgHover {
+        pointer-events: none;
+        background: var(--bg-color);
+        opacity: .6;
+    }
+
+}
+
+@media (max-width: 520px) {
+    html {
+        font-size: 50%;
+    }
+
+    .home-content h1 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .home-scri {
+        width: 160px;
+    }
+
+    .home-scri a {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 462px) {
+    .home-content h1 {
+        font-size: 5.2rem;
+    }
+
+    .educacao {
+        padding: 10rem 4% 5rem 5%;
+    }
+
+    .contacto form .input-box .input-field {
+        width: 100%;
+    }
+
+    .footer {
+        flex-direction: column-reverse
+    }
+
+    .footer p {
+        margin-top: 2rem;
+        text-align: center;
+    }
+} 
+
+@media (max-width: 371px) {
+    .home {
+        justify-content: center;
+    }
+
+    .home-content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-content h1 {
+        font-size: 5rem;
+    }
+}
+
+/*KEYFRAMES ANIMATION*/
+@keyframes homeBgText {
+    0%,
+    10%,
+    100% {
+        background-position: -33rem 0;
+    }
+    65%,
+    85% {
+        background-position: 0 0;
+    }
+}
+
+@keyframes homeCursorText {
+    0%,
+    10%,
+    100% {
+        width: 0;
+    }
+    65%,
+    78%,
+    85% {
+        width: 100%;
+        opacity: 1;
+    }
+
+    75%,
+    81% {
+        opacity: 0;
+    }
+}
+
+@keyframes sobreSpinner {
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes showRight {
+    100% {
+        width: 0;
+    }
 }
